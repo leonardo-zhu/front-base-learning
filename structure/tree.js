@@ -50,17 +50,18 @@ function dfsWithStack(node) {
 function bfs(node) {
   const queue = []
   queue.push(node)
-  while (queue.length !== 0){
+  while (queue.length !== 0) {
     const treeNode = queue.shift()
 
     console.log(treeNode.title)
-    if (treeNode.right) {
-      queue.push(treeNode.right)
-    }
-
     if (treeNode.left) {
       queue.push(treeNode.left)
     }
+
+    if (treeNode.right) {
+      queue.push(treeNode.right)
+    }
   }
 }
+
 bfs(tree)
