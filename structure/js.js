@@ -20,9 +20,9 @@ Array.prototype.reduce = function (callbackfn, initValue) {
   return result
 }
 
-console.log([1,2,3,4,5].reduce(function (a, b) {
+console.log([1, 2, 3, 4, 5].reduce(function (a, b) {
   return a + b
-},1))
+}, 1))
 
 // 重写 some
 Array.prototype.some = function (predicate) {
@@ -43,7 +43,7 @@ Array.prototype.every = function (predicate) {
   return flag
 }
 
-// 重写instanceof
+// 重写 instanceof
 function cusInstanceof(left, right) {
   if (typeof left !== "object" || left == null) return false
   let proto = Object.getPrototypeOf(left)
@@ -51,6 +51,36 @@ function cusInstanceof(left, right) {
     if (proto === null) return false
     if (proto === right.prototype) return true
     proto = Object.getPrototypeOf(proto)
+  }
+}
+
+// 重写 apply
+Function.prototype.apply = function (thisArg, argArray) {
+  const context = thisArg || window;
+  const args = argArray || []
+  context.fn = this;
+  const result = context.fn(...args)
+  delete context.fn
+  return result;
+}
+
+//重写 call
+Function.prototype.call = function (thisArg, ...argArray) {
+  const context = thisArg || window;
+  const args = argArray || []
+  context.fn = this;
+  const result = context.fn(...args)
+  delete context.fn
+  return result;
+}
+
+//重写 bind
+Function.prototype.bind = function (thisArg, argArray) {
+  const context = thisArg || window
+  const args = argArray || []
+
+  return () => {
+    return this.apply(context, args)
   }
 }
 
