@@ -63,6 +63,12 @@ function bubbleSort(arr) {
  * 归并排序
  * 分治法的体现
  */
+
+/**
+ * 快速排序
+ */
+
+
 module.exports = {
   selectSort,
   insertSort,

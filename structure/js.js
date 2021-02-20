@@ -85,6 +85,14 @@ Function.prototype.bind = function (thisArg, argArray) {
 }
 
 /**
+ * 函数柯里化
+ */
+function curry(fn, ...args) {
+  // 获取函数需要的参数长度
+  return fn.length <= args.length ? fn(...args) : curry.bind(null, fn, ...args);
+}
+
+/**
  * debounce 实现
  * @param fn
  * @param wait
